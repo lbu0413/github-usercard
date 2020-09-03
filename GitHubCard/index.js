@@ -7,6 +7,15 @@ import axios from 'axios';
     https://api.github.com/users/<your name>
 */
 axios.get('https://api.github.com/users/lbu0413')
+  .then(stuff => {
+    const paulData = stuff.data;
+    console.log(paulData);
+    
+
+  })
+  .catch(err => {
+    debugger
+  })
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -53,6 +62,44 @@ const followersArray = [];
       </div>
     </div>
 */
+function accountMaker({paulData}){
+  const cardDiv = document.createElement('div');
+  const userImg = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  const userName = document.createElement('h3');
+  const githubName = document.createElement('p');
+  const userLoc = document.createElement('p');
+  const userProfile = document.createElement('p');
+  const userAddress = document.createElement('a');
+  const userFollowers = document.createElement('p');
+  const userFollowing = document.createElement('p');
+  const userBio = document.createElement('p');
+
+  cardDiv.appendChild(userImg);
+  cardDiv.appendChild(cardInfo);
+  cardInfo.appendChild(userName);
+  cardInfo.appendChild(githubName);
+  cardInfo.appendChild(userLoc);
+  cardInfo.appendChild(userProfile);
+  userProfile.appendChild(userAddress);
+  cardInfo.appendChild(userFollowers);
+  cardInfo.appendChild(userFollowing);
+  cardInfo.appendChild(userBio);
+
+  cardDiv.classList.add('.card');
+  cardInfo.classList.add('.card-info');
+  userName.classList.add('.name');
+  githubName.classList.add('.username');
+
+  userImg.src = paulData.avatar_url;
+  console.log(userImg);
+
+
+  return cardDiv;
+
+  
+  
+}
 
 /*
   List of LS Instructors Github username's:
