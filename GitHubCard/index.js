@@ -13,7 +13,7 @@ const cards = document.querySelector('.cards');
 axios.get('https://api.github.com/users/lbu0413')
   .then(stuff => {
     const theData = stuff.data;
-    // console.log(theData);
+    console.log(theData);
     accountMaker(theData);
     const myCard = accountMaker(theData);
     cards.appendChild(myCard);
@@ -111,10 +111,10 @@ function accountMaker(obj){
   cardInfo.appendChild(userFollowing);
   cardInfo.appendChild(userBio);
 
-  cardDiv.classList.add('.card');
-  cardInfo.classList.add('.card-info');
-  userName.classList.add('.name');
-  githubName.classList.add('.username');
+  cardDiv.classList.add('card');
+  cardInfo.classList.add('card-info');
+  userName.classList.add('name');
+  githubName.classList.add('username');
   // console.log(obj);
   userImg.src = obj.avatar_url;
   userName.textContent = obj.name;
@@ -124,6 +124,7 @@ function accountMaker(obj){
   userAddress.textContent = obj.html_url;
   userFollowers.textContent = obj.followers;
   userFollowing.textContent = obj.following;
+  userBio.textContent = obj.bio;
 
 
   return cardDiv;
