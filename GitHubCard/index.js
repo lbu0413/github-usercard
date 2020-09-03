@@ -12,10 +12,10 @@ const cards = document.querySelector('.cards');
 
 axios.get('https://api.github.com/users/lbu0413')
   .then(stuff => {
-    const paulData = stuff.data;
-    // console.log(paulData);
-    accountMaker(paulData);
-    const myCard = accountMaker(paulData);
+    const theData = stuff.data;
+    // console.log(theData);
+    accountMaker(theData);
+    const myCard = accountMaker(theData);
     cards.appendChild(myCard);
 
   })
@@ -55,10 +55,10 @@ const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigkne
 followersArray.forEach(person => {
   axios.get(`https://api.github.com/users/${person}`)
     .then(stuff => {
-      const paulData = stuff.data;
-      // console.log(paulData);
-      accountMaker(paulData);
-      const myCard = accountMaker(paulData);
+      const theData = stuff.data;
+      // console.log(theData);
+      accountMaker(theData);
+      const myCard = accountMaker(theData);
       cards.appendChild(myCard);
     })
     .catch(err => {
