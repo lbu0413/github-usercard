@@ -6,17 +6,26 @@ import axios from 'axios';
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+
+
+const cards = document.querySelector('.cards');
+
 axios.get('https://api.github.com/users/lbu0413')
   .then(stuff => {
     const paulData = stuff.data;
-    console.log(paulData);
-    
+    // console.log(paulData);
+    accountMaker(paulData);
+    const myCard = accountMaker(paulData);
+    cards.appendChild(myCard);
 
   })
   .catch(err => {
     debugger
   })
 
+console.log(cards);
+
+  
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -41,7 +50,23 @@ axios.get('https://api.github.com/users/lbu0413')
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+
+followersArray.forEach(person => {
+  axios.get(`https://api.github.com/users/${person}`)
+    .then(stuff => {
+      const paulData = stuff.data;
+      // console.log(paulData);
+      accountMaker(paulData);
+      const myCard = accountMaker(paulData);
+      cards.appendChild(myCard);
+    })
+    .catch(err => {
+      debugger
+    })
+
+    
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -62,7 +87,7 @@ const followersArray = [];
       </div>
     </div>
 */
-function accountMaker({paulData}){
+function accountMaker(obj){
   const cardDiv = document.createElement('div');
   const userImg = document.createElement('img');
   const cardInfo = document.createElement('div');
@@ -90,9 +115,15 @@ function accountMaker({paulData}){
   cardInfo.classList.add('.card-info');
   userName.classList.add('.name');
   githubName.classList.add('.username');
-
-  userImg.src = paulData.avatar_url;
-  console.log(userImg);
+  // console.log(obj);
+  userImg.src = obj.avatar_url;
+  userName.textContent = obj.name;
+  githubName.textContent = obj.login;
+  userLoc.textContent = obj.location;
+  userAddress.href = obj.html_url;
+  userAddress.textContent = obj.html_url;
+  userFollowers.textContent = obj.followers;
+  userFollowing.textContent = obj.following;
 
 
   return cardDiv;
@@ -100,6 +131,9 @@ function accountMaker({paulData}){
   
   
 }
+
+
+
 
 /*
   List of LS Instructors Github username's:
